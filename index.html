@@ -12,8 +12,19 @@
 <body>
 
     <div class="container mt-3">
-        <h2>Stacked form</h2>
-        <form action="cadastrar_usuario.php">
+        <h2>Cadastrar Usuário</h2>
+        <form action="cadastrar_usuario.php" method="post">
+
+
+            <div class="mb-3 mt-3">
+                <label for="email">Grupo do Usuário:</label>
+                <select class="form-select" name="id_grupo">
+                    <option>Selecione o grupo do usuário</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Barbeiro</option>
+                    <option value="3">Cliente</option>
+                </select>
+            </div>
 
             <div class="mb-3 mt-3">
                 <label for="email">Nome:</label>
@@ -35,10 +46,12 @@
 
             <div class="mb-3 mt-3">
                 <label for="email">Nome do Banco:</label>
-                <select class="form-select">
+                <select class="form-select" name="nome_do_banco">
                     <option>Selecione um banco</option>
+                    <option value="Nubank" selected>Nubank</option>
                 </select>
             </div>
+
 
             <div class="mb-3 mt-3">
                 <label for="email">Número da Agência:</label>
@@ -65,8 +78,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#nome').val('Germano Salva');
-            $('#email').val('germano@mail.com');
+            $('#nome').val('Marta Souza');
+            $('#email').val('marta@mail.com');
             $('#data_de_nascimento').val('2000-01-01');
             $('#numero_agencia').val('5698');
             $('#numero_conta').val('55485547');
