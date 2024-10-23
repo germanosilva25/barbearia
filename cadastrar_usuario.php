@@ -30,8 +30,7 @@ VALUES ('$nome', '$email', '$data_de_nascimento', $id_grupo)";
 
 
 
-$sql_dados_bancarios = "INSERT INTO dados_bancarios (nome_do_banco , numero_agencia , numero_conta , chave_pix )
-VALUES ('$nome_do_banco', '$numero_agencia', '$numero_conta', $chave_pix)";
+
 
 
 if ($conn->query($sql_usuario) === TRUE) {
@@ -39,6 +38,16 @@ if ($conn->query($sql_usuario) === TRUE) {
 } else {
   echo "Error: " . $sql_usuario . "<br>" . $conn->error;
 }
+
+
+$sql = "SELECT * FROM usuarios order by id_usuario desc limit 1";
+$result = $conn->query($sql);
+$id_usuario = $result->fetch_assoc()['id_usuario'];
+
+
+$sql_dados_bancarios = "INSERT INTO dados_bancarios (nome_do_banco , numero_agencia , numero_conta , chave_pix, id_usuario )
+VALUES ('$nome_do_banco', '$numero_agencia', '$numero_conta', '$chave_pix', $id_usuario)";
+
 
 if ($conn->query($sql_dados_bancarios) === TRUE) {
   echo "New record created successfully";

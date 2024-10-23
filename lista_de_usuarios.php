@@ -1,8 +1,13 @@
 <?php
 
 include "connection.php";
-$sql = "SELECT * FROM usuarios";
+$sql = "SELECT * FROM usuarios order by id_usuario desc limit 1";
 $result = $conn->query($sql);
+echo "<pre>";
+print_r([
+  'usuario' => $result->fetch_assoc()['id_usuario']
+]);
+exit();
 
 $grupos = ["Administrador", "Barbeiro", "Cliente"]
 ?>
