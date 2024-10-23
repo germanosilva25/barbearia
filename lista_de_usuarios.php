@@ -1,6 +1,10 @@
 <?php
 
-include "connect.php";
+include "connection.php";
+$sql = "SELECT * FROM usuarios";
+$result = $conn->query($sql);
+
+$grupos = ["Administrador", "Barbeiro", "Cliente"]
 ?>
 
 
@@ -16,15 +20,34 @@ include "connect.php";
 </head>
 <body>
 
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="lista_de_usuarios.php">Lista de usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
 <div class="container mt-3">
-  <h2>Striped Rows</h2>
-  <p>The .table-striped class adds zebra-stripes to a table:</p>            
+  <h2>Lista de usuários</h2>           
   <table class="table table-striped">
     <thead>
       <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Documento</th>
+        <th>Grupo</th>
       </tr>
     </thead>
     <tbody>
@@ -33,7 +56,7 @@ include "connect.php";
       if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-          echo "<tr><td>".$row['id']."</td><td>".$row['name']."</td><td>".$row['documento']."</td></tr>";
+          echo "<tr><td>".$row['id_usuario']."</td><td>".$row['nome']."</td><td>".$grupos[$row['id_grupo']]."</td></tr>";
         }
       }
       ?>
