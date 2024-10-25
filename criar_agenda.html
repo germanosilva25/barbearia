@@ -13,13 +13,14 @@
 
     <div class="container mt-3">
         <h2>Cadastro da Agenda do Barbeiro</h2>
-        <form action="/action_page.php">
+        <form action="criar_agenda.php" method="post">
             <div class="mb-3 mt-3">
                 <label class="form-check-label">
                     Barbeiro
                 </label>
-                <select class="form-select">
+                <select class="form-select" name="id_usuario">
                     <option>Selecione um barbeiro</option>
+                    <option value="1">João</option>
 
                 </select>
             </div>
@@ -28,7 +29,7 @@
                 <label class="form-check-label">
                     Dia da semana
                 </label>
-                <select class="form-select">
+                <select class="form-select" name="dia_da_semana">
                     <option>Selecione o dia da semana</option>
                     <option value="0">Domingo</option>
                     <option value="1">Segunda-feira</option>
@@ -42,25 +43,25 @@
 
             <div class="mb-3 mt-3">
                 <label for="horario_inicio">Horário início:</label>
-                <input type="time" class="form-control" id="horario_inicio" placeholder="Enter email"
+                <input type="time" class="form-control" name="horario_inicio" placeholder="Enter email"
                     name="horario_inicio">
             </div>
 
             <div class="mb-3 mt-3">
                 <label for="horario_saida_intervelo">Horário saída intervalo:</label>
-                <input type="time" class="form-control" id="horario_saida_intervelo" placeholder="Enter email"
+                <input type="time" class="form-control" name="horario_saida_intervelo" placeholder="Enter email"
                     name="horario_saida_intervelo">
             </div>
 
             <div class="mb-3 mt-3">
                 <label for="horario_volta_intervela">Horário volta intervalo:</label>
-                <input type="time" class="form-control" id="horario_volta_intervela" placeholder="Enter email"
+                <input type="time" class="form-control" name="horario_volta_intervela" placeholder="Enter email"
                     name="horario_volta_intervela">
             </div>
 
             <div class="mb-3 mt-3">
                 <label for="horario_fim">Horário fim:</label>
-                <input type="time" class="form-control" id="horario_fim" placeholder="Enter email" name="horario_fim">
+                <input type="time" class="form-control" name="horario_fim" placeholder="Enter email" name="horario_fim">
             </div>
 
 

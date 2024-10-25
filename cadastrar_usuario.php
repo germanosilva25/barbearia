@@ -5,6 +5,8 @@ echo "<pre>";
 
 print_r($_POST);
 
+$grupo_usuario = ['admin', 'barbeiro', 'cliente'];
+
 
 $nome = $_POST['nome'];
 $email = $_POST['email'];
@@ -22,7 +24,7 @@ echo "<br>chave_pix $chave_pix";
 echo "<br>numero_conta $numero_conta";
 echo "<br>numero_agencia $numero_agencia";
 
-// exit('<br>não inseriri');
+exit('<br>não inserir');
 
 
 $sql_usuario = "INSERT INTO usuarios (nome , email, data_de_nascimento, id_grupo)
