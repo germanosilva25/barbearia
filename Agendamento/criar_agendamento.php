@@ -1,7 +1,13 @@
 <?php
 include "../connection.php";
 
-$sql = "SELECT * FROM agendas inner join usuarios on usuarios.id_usuario = agendas.id_usuario";
+$dayofweek = date('w', strtotime($_POST['data']));
+
+// echo "<br><br><br><br>dia da semana agendamento: " . $dayofweek;
+
+$sql = "SELECT * FROM agendas inner join usuarios on usuarios.id_usuario = agendas.id_usuario 
+where dia_da_semana = $dayofweek
+";
 $result = $conn->query($sql);
 
 // echo "<pre>";
@@ -56,6 +62,7 @@ $result = $conn->query($sql);
         <th>Barbeiro</th>
         <th>Dia da Semana</th>
         <th>Horário</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -64,7 +71,13 @@ $result = $conn->query($sql);
         if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-          echo "<tr><td>".$row['nome']."</td><td>".$row['dia_da_semana']."</td><td>".$row['horario']."</td></tr>";
+          echo "
+            <tr>
+                <td>".$row['nome']."</td>
+                <td>".$row['dia_da_semana']."</td>
+                <td>".$row['horario']."</td>
+                <td><button class='btn btn-primary'>Agendar</button></td>
+            </tr>";
         }
     }
       ?>
