@@ -1,12 +1,23 @@
 <?php
 include "../connection.php";
 
+$dias_da_semana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+
 $dayofweek = date('w', strtotime($_POST['data']));
+$data_agendamento = $_POST['data'];
 
 // echo "<br><br><br><br>dia da semana agendamento: " . $dayofweek;
 
 $sql = "SELECT * FROM agendas inner join usuarios on usuarios.id_usuario = agendas.id_usuario 
 where dia_da_semana = $dayofweek
+";
+
+$sql = "
+select nome, agendas.dia_da_semana, agendas.horario from agendas 
+INNER join usuarios on usuarios.id_usuario = agendas.id_usuario
+where agendas.id_agenda not in (SELECT agendas.id_agenda FROM `agendas` inner join agendamentos on agendamentos.id_agenda = agendas.id_agenda
+inner join usuarios on usuarios.id_usuario = agendas.id_usuario where agendamentos.data = '$data_agendamento' and agendas.dia_da_semana = $dayofweek)
+and dia_da_semana = $dayofweek
 ";
 $result = $conn->query($sql);
 
@@ -16,7 +27,8 @@ $result = $conn->query($sql);
 //     'result' => $result,
 // ]);
 
-
+// SELECT * FROM `agendas` inner join agendamentos on agendamentos.id_agenda = agendas.id_agenda
+// inner join usuarios on usuarios.id_usuario = agendas.id_usuario
 
 ?>
 
@@ -74,7 +86,7 @@ $result = $conn->query($sql);
           echo "
             <tr>
                 <td>".$row['nome']."</td>
-                <td>".$row['dia_da_semana']."</td>
+                <td>".$dias_da_semana[$row['dia_da_semana']]."</td>
                 <td>".$row['horario']."</td>
                 <td><button class='btn btn-primary'>Agendar</button></td>
             </tr>";
