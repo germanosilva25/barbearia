@@ -1,6 +1,6 @@
 <?php
 
-include "../connection.php";
+include "conexao.php";
 
 echo "<pre>";
 
@@ -10,12 +10,12 @@ parse_str($parts['query'], $query);
 $id_agenda = $query['id_agenda'];
 $data = $query['data'];
 $id_usuario = $query['id_usuario'];
-
+$servico = $query['id_servico'];
 $sql_agendamento = "
     INSERT INTO agendamentos 
-    (id_usuario, id_agenda, data)
+    (id_usuario, id_agenda, data, id_servico)
     VALUES
-    ($id_usuario, $id_agenda, '$data')
+    ($id_usuario, $id_agenda, '$data', $servico)
 ";
 
 
