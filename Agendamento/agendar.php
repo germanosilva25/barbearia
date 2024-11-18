@@ -1,5 +1,5 @@
 <?php
-include "conexao.php";
+include "../connection.php";
 ?>
 
 
@@ -63,7 +63,7 @@ include "conexao.php";
                 <select class="form-select" name="id_usuario">
                     <option>Selecione um Cliente</option>
                     <?php
-                    $sql = 'SELECT * FROM abc WHERE id_grupo = 3';
+                    $sql = 'SELECT * FROM usuarios WHERE id_grupo = 3';
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {

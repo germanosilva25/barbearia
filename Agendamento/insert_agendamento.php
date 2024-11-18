@@ -1,6 +1,6 @@
 <?php
 
-include "conexao.php";
+include "../connection.php";
 
 echo "<pre>";
 
