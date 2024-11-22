@@ -8,45 +8,46 @@ $dias_da_semana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', '
 
 $data_agendamento = $_POST['data'];  // Data do agendamento enviada pelo formulário
 $servico = $_POST['servico'];
+$id_usuario = $_POST['id_usuario'];
 
 // Verificar o dia da semana baseado na data
 $dayofweek = date('w', strtotime($data_agendamento));
 /* 
  SELECT (selecione)
- (Tabela.coluna) abc.nome, agenda.dia_da_semana, agenda.horario_inicio, agenda.id_agenda, abc.id_usuario
+ (Tabela.coluna) usuarios.nome, agendasdia_da_semana, agendashorario, agendasid_agenda, usuarios.id_usuario
 
   FROM agenda
 
-  INNER JOIN abc ON abc.id_usuario = agenda.id_usuario
- (juntando coluna id_usuario das duas tabelas na tabela abc)
+  INNER JOIN usuarios ON usuarios.id_usuario = agendasid_usuario
+ (juntando coluna id_usuario das duas tabelas na tabela usuarios)
 
- WHERE agenda.dia_da_semana = $dayofweek
+ WHERE agendasdia_da_semana = $dayofweek
  ($dayofweek é o dia da semana que a pessoa colocar no cadastro da agenda exemplo: domingo = 0)
 
- AND agenda.id_agenda NOT IN (SELECT agenda.id_agenda  FROM agendamentos 
+ AND agendasid_agenda NOT IN (SELECT agendasid_agenda  FROM agendamentos 
  (O NOT IN exclui os id_agenda já agendados para a data específica.)
 
-  SELECT agenda.id_agenda 
+  SELECT agendasid_agenda 
   FROM agendamentos 
-  (juntando a coluna id_agenda das duas tabelas na tabela agendamentos) INNER JOIN agenda ON agendamentos.id_agenda = agenda.id_agenda
+  (juntando a coluna id_agenda das duas tabelas na tabela agendamentos) INNER JOIN agenda ON agendamentos.id_agenda = agendasid_agenda
 
  ('data' vem da pagina de cadastrar agendamentos) WHERE agendamentos.data = '$data_agendamento'
  )
- (aqui ordena por ordem crescente os horarios agendados) ORDER BY agenda.horario_inicio*/
+ (aqui ordena por ordem crescente os horarios agendados) ORDER BY agendashorario*/
 
 $sql = "
 SELECT 
-abc.nome, agenda.dia_da_semana, agenda.horario_inicio, agenda.id_agenda, abc.id_usuario 
-FROM agenda
-INNER JOIN abc ON abc.id_usuario = agenda.id_usuario
-WHERE agenda.dia_da_semana = $dayofweek
-AND agenda.id_agenda NOT IN (
-    SELECT agenda.id_agenda 
+usuarios.nome, agendas.dia_da_semana, agendas.horario, agendas.id_agenda, usuarios.id_usuario 
+FROM agendas
+INNER JOIN usuarios ON usuarios.id_usuario = agendas.id_usuario
+WHERE agendas.dia_da_semana = $dayofweek
+AND agendas.id_agenda NOT IN (
+    SELECT agendas.id_agenda 
     FROM agendamentos 
-    INNER JOIN agenda ON agendamentos.id_agenda = agenda.id_agenda
+    INNER JOIN agendas ON agendamentos.id_agenda = agendas.id_agenda
     WHERE agendamentos.data = '$data_agendamento'
 )
-ORDER BY agenda.horario_inicio
+ORDER BY agendas.horario
 
 ";
 
@@ -64,6 +65,20 @@ $result = $conn->query($sql);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../Agendamento/agendar.php">Criar Agendamento</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Usuario/index.html">Cadastrar Usuário</a>
+                </li>
+               
+            </ul>
+        </div>
+    </nav>
 
 <div class="container mt-3">
     <h2>Lista de Agendamentos Disponíveis para o dia: <?php echo $data_agendamento; ?></h2>
@@ -86,12 +101,12 @@ $result = $conn->query($sql);
                     <tr>
                             <td>".$row['nome']."</td>
                             <td>".$dias_da_semana[$row['dia_da_semana']]."</td>
-                            <td>".$row['horario_inicio']."</td>
+                            <td>".$row['horario']."</td>
                             <td>
                                 <input type='hidden' name='id_usuario' value='".$row['id_usuario']."'>
                                 <input type='hidden' name='id_agenda' value='".$row['id_agenda']."'>
                                 <input type='hidden' name='data' value='$data_agendamento'>
-                                <a  href='insert_agendamento.php?id_agenda=".$row['id_agenda']."&data=".$data_agendamento."&id_usuario=".$row['id_usuario']."&id_servico=".$servico."'  ><button type='submit' class='btn btn-primary'>Agendar</button></a>
+                                <a  href='insert_agendamento.php?id_agenda=".$row['id_agenda']."&data=".$data_agendamento."&id_usuario=".$id_usuario."&id_servico=".$servico."'  ><button type='submit' class='btn btn-primary'>Agendar</button></a>
                             </td>
                     </tr>
                     ";

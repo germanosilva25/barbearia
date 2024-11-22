@@ -14,38 +14,24 @@ include "../connection.php";
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <style>
-        .container {
-            width: 40%;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 10);
-            color: black;
-            backdrop-filter: blur(30px);
-        }
         
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            height: 100vh;
-            background-size: cover;
-            background-position: center;
-            color: #ffffff;
-            background-image: linear-gradient(170deg, rgb(0, 0, 0), gray);
-            display:flex;
-            align-items:center;
-        }
-        
-        h2, label {
-            text-align: center;
-            color: white;
-        }
-        .botoes{
-            display:flex;
-            justify-content:space-between;
-        }
     </style>
-<body>
+<body class="d-flex flex-column h-100">
+
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../index.php">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Lista de agendamentos</a>
+                </li>
+               
+            </ul>
+        </div>
+    </nav>
 
     <div class="container mt-3">
         <h2>Criar agendamento</h2>

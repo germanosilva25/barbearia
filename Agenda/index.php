@@ -1,3 +1,6 @@
+<?php
+include "../connection.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +13,22 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../Agendamento/agendar.php">Criar Agendamento</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Usuario/index.html">Cadastrar Usuário</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Agenda/index.php">Criar Agenda</a>
+                </li>
+               
+            </ul>
+        </div>
+    </nav>
 
     <div class="container mt-3">
         <h2>Cadastro da Agenda do Barbeiro</h2>
@@ -20,7 +39,15 @@
                 </label>
                 <select class="form-select" name="id_usuario">
                     <option>Selecione um barbeiro</option>
-                    <option value="1">João</option>
+                    <?php
+                    $sql = 'SELECT * FROM usuarios WHERE id_grupo = 2';
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option value='".$row['id_usuario']."'>".$row['nome']."</option>";
+                        }
+                    }
+                    ?>
 
                 </select>
             </div>

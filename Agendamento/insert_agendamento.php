@@ -7,6 +7,10 @@ echo "<pre>";
 
 $parts = parse_url($_SERVER['REQUEST_URI']);
 parse_str($parts['query'], $query);
+
+// echo "<pre>";
+// print_r($query);
+// exit();
 $id_agenda = $query['id_agenda'];
 $data = $query['data'];
 $id_usuario = $query['id_usuario'];

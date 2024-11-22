@@ -1,6 +1,6 @@
 <?php
 
-include "connection.php";
+include "../connection.php";
 $sql = "SELECT * FROM usuarios ";
 $result = $conn->query($sql);
 // echo "<pre>";
